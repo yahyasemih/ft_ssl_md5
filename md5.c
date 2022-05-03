@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:21:11 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 11:31:27 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:39:03 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ char	*md5(const char *str, uint32_t len)
 	return (s);
 }
 
-char	*last_stream_block(t_md5_context *ctx, char *buff, int r, int total_len)
+static char	*last_stream_block(t_md5_context *ctx, char *buff, int r,
+	int total_len)
 {
 	char		*s;
 	uint32_t	new_len;

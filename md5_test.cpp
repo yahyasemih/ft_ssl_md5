@@ -159,14 +159,14 @@ void md5(uint8_t *initial_msg, size_t initial_len) {
 
 }
 
-int main(int argc, char **argv) {
+int main(int argc, unsigned char **argv) {
 
     if (argc < 2) {
         printf("usage: %s 'string'\n", argv[0]);
         return 1;
     }
 
-    char *msg = argv[1];
+    unsigned char *msg = argv[1];
     size_t len = strlen(msg);
 
     // benchmark
@@ -175,7 +175,7 @@ int main(int argc, char **argv) {
         md5(msg, len);
     // }
 
-    //var char digest[16] := h0 append h1 append h2 append h3 //(Output is in little-endian)
+    //var unsigned char digest[16] := h0 append h1 append h2 append h3 //(Output is in little-endian)
     uint8_t *p;
 
     // display result

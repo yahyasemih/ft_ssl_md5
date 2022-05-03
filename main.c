@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:15:29 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 11:51:39 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/03 17:22:33 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static t_hash_function	str_to_hash_function(const char *str)
 {
 	if (ft_strcmp(str, "md5") == 0)
 		return (md5);
+	else if (ft_strcmp(str, "sha256") == 0)
+		return (sha256);
 	else
 		return (invalid_hash_function);
 }
@@ -37,6 +39,8 @@ static t_stream_hash_function	str_to_stream_hash_function(const char *str)
 {
 	if (ft_strcmp(str, "md5") == 0)
 		return (md5_from_stream);
+	else if (ft_strcmp(str, "sha256") == 0)
+		return (sha256_from_stream);
 	else
 		return (invalid_stream_hash_function);
 }
@@ -57,13 +61,13 @@ int	main(int argc, char *argv[])
 		write(2, "' is an invalid command.\n", 25);
 		return (1);
 	}
-	ctx.flags = 0;
+	ft_memset(&ctx, 0, sizeof(ctx));
 	ctx.cmd = argv[1];
-	ctx.is_file = 0;
 	ctx.argc = argc;
 	ctx.argv = argv;
 	ctx.curr_arg = 2;
 	ctx.hash_function = str_to_hash_function(ctx.cmd);
 	ctx.stream_hash_function = str_to_stream_hash_function(ctx.cmd);
+	ctx.len = 16 + (ctx.hash_function == sha256) * 16;
 	return (process_arguments(&ctx));
 }

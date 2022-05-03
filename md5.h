@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:51:54 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 09:02:53 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/03 17:23:48 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_md5_context
 	uint32_t	d;
 	uint32_t	f;
 	uint32_t	g;
-	uint32_t	*w;
 }	t_md5_context;
 
 void		do_f(t_md5_context *ctx, uint32_t i);

@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 08:46:59 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 11:31:26 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/03 17:19:38 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	handle_prepand_option(t_ft_ssl_context *ctx)
 	s = ctx->stream_hash_function(0);
 	if (s == NULL)
 		return ;
-	write_in_hex(s);
+	write_in_hex(s, ctx->len);
 	write(1, "\n", 1);
 	free(s);
 }
