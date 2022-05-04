@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 08:46:20 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 19:41:48 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/04 06:59:16 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "libc_utils.h"
 # include "md5.h"
 # include "sha256.h"
+# include "sha224.h"
 
 # define F_QUIET 0x1
 # define F_REVERSE 0x2

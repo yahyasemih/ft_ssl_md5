@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 06:34:17 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 17:58:01 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/04 07:00:16 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	print_result(t_ft_ssl_context *ctx, const char *s, const char *src,
 
 int	is_valid_command(const char *cmd)
 {
-	return (ft_strcmp(cmd, "md5") == 0 || ft_strcmp(cmd, "sha256") == 0);
+	return (ft_strcmp(cmd, "md5") == 0 || ft_strcmp(cmd, "sha256") == 0
+		|| ft_strcmp(cmd, "sha224") == 0);
 }
 
 uint64_t	swap_bytes(uint64_t x)
