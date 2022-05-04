@@ -6,13 +6,13 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 11:49:37 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 18:23:34 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/04 08:09:17 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sha256.h"
 
-char	*sha256_fill_result(t_sha256_context *ctx, char *str)
+char	*sha256_fill_result(t_sha2xx_context *ctx, char *str)
 {
 	int		i;
 	int		j;
@@ -36,7 +36,7 @@ char	*sha256_fill_result(t_sha256_context *ctx, char *str)
 	return (str);
 }
 
-void	init_ctx(t_sha256_context *ctx)
+void	init_ctx(t_sha2xx_context *ctx)
 {
 	ctx->big_h[0] = 0x6a09e667;
 	ctx->big_h[1] = 0xbb67ae85;
@@ -48,7 +48,7 @@ void	init_ctx(t_sha256_context *ctx)
 	ctx->big_h[7] = 0x5be0cd19;
 }
 
-void	update_ctx(t_sha256_context *ctx, int update_hash)
+void	update_ctx(t_sha2xx_context *ctx, int update_hash)
 {
 	if (update_hash == 1)
 	{
@@ -74,7 +74,7 @@ void	update_ctx(t_sha256_context *ctx, int update_hash)
 	}
 }
 
-void	block_iteration(t_sha256_context *ctx)
+void	block_iteration(t_sha2xx_context *ctx)
 {
 	uint32_t	t;
 
@@ -100,7 +100,7 @@ void	block_iteration(t_sha256_context *ctx)
 
 char	*sha256(const char *str, uint32_t len)
 {
-	t_sha256_context	ctx;
+	t_sha2xx_context	ctx;
 	uint32_t			i;
 	uint32_t			t;
 

@@ -6,13 +6,13 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 11:49:37 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 07:01:39 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/04 08:09:18 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sha224.h"
 
-char	*sha224_fill_result(t_sha224_context *ctx, char *str)
+char	*sha224_fill_result(t_sha2xx_context *ctx, char *str)
 {
 	int		i;
 	int		j;
@@ -36,7 +36,7 @@ char	*sha224_fill_result(t_sha224_context *ctx, char *str)
 	return (str);
 }
 
-void	sha224_init_ctx(t_sha224_context *ctx)
+void	sha224_init_ctx(t_sha2xx_context *ctx)
 {
 	ctx->big_h[0] = 0xC1059ED8;
 	ctx->big_h[1] = 0x367CD507;
@@ -48,7 +48,7 @@ void	sha224_init_ctx(t_sha224_context *ctx)
 	ctx->big_h[7] = 0xBEFA4FA4;
 }
 
-void	sha224_update_ctx(t_sha224_context *ctx, int update_hash)
+void	sha224_update_ctx(t_sha2xx_context *ctx, int update_hash)
 {
 	if (update_hash == 1)
 	{
@@ -74,7 +74,7 @@ void	sha224_update_ctx(t_sha224_context *ctx, int update_hash)
 	}
 }
 
-void	sha224_block_iteration(t_sha224_context *ctx)
+void	sha224_block_iteration(t_sha2xx_context *ctx)
 {
 	uint32_t	t;
 
@@ -83,7 +83,7 @@ void	sha224_block_iteration(t_sha224_context *ctx)
 	while (t < 64)
 	{
 		ctx->t1 = ctx->h + big_sigma(ctx->e, 1) + ch(ctx->e, ctx->f, ctx->g)
-			+ g_sha224_k[t] + ctx->w[t];
+			+ g_sha_k[t] + ctx->w[t];
 		ctx->t2 = big_sigma(ctx->a, 0) + maj(ctx->a, ctx->b, ctx->c);
 		ctx->h = ctx->g;
 		ctx->g = ctx->f;
@@ -100,7 +100,7 @@ void	sha224_block_iteration(t_sha224_context *ctx)
 
 char	*sha224(const char *str, uint32_t len)
 {
-	t_sha224_context	ctx;
+	t_sha2xx_context	ctx;
 	uint32_t			i;
 	uint32_t			t;
 
