@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:06:34 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 08:09:17 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/04 08:21:50 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,10 @@ typedef struct s_sha2xx_context
 	uint32_t	t1;
 	uint32_t	t2;
 }	t_sha2xx_context;
+
+void	sha2xx_update_ctx(t_sha2xx_context *ctx, int update_hash);
+void	sha2xx_block_iteration(t_sha2xx_context *ctx);
+char	*sha2xx_fill_result(t_sha2xx_context *ctx, char *str, int hash_nbr);
+void	sha2xx_process_block(uint32_t *bloc, t_sha2xx_context *ctx);
 
 #endif

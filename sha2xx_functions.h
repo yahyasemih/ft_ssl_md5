@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha256_functions.h                                 :+:      :+:    :+:   */
+/*   sha2xx_functions.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:26:31 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 19:41:28 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/04 08:23:49 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHA256_FUNCTIONS_H
-# define SHA256_FUNCTIONS_H
+#ifndef SHA2XX_FUNCTIONS_H
+# define SHA2XX_FUNCTIONS_H
 
 # include "sha256.h"
 
