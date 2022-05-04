@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 18:20:08 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 06:58:45 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/04 07:48:59 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*sha224_last_stream_block(t_sha224_context *ctx, char *buff, int r,
 	sha224_process_block((uint32_t *)(buff), ctx);
 	if (new_len + 8 > 64)
 		sha224_process_block((uint32_t *)(buff + 64), ctx);
-	s = malloc(25 * sizeof(char));
+	s = malloc(29 * sizeof(char));
 	if (s == NULL)
 		return (NULL);
 	sha224_fill_result(ctx, s);
