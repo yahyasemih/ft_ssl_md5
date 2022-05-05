@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 06:34:17 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 07:00:16 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 11:54:03 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	*process_str_input(const char *str, t_ft_ssl_context *ctx)
 	ft_memcpy(buff, str, r);
 	buff[r] = (char)128;
 	bits_len = 8ULL * r;
-	if (ctx->hash_function == sha256)
+	if (ctx->hash_function == sha256 || ctx->hash_function == sha224)
 		bits_len = swap_bytes(bits_len);
 	ft_memcpy(buff + new_len, &bits_len, sizeof(uint64_t));
 	s = ctx->hash_function(buff, new_len + 8);
