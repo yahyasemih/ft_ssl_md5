@@ -6,7 +6,7 @@
 #    By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 11:23:54 by yez-zain          #+#    #+#              #
-#    Updated: 2022/05/05 16:28:53 by yez-zain         ###   ########.fr        #
+#    Updated: 2022/05/05 18:48:29 by yez-zain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,11 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 SRCS = ft_ssl.c ft_ssl_utils.c libc_utils.c main.c md5_utils.c md5.c\
 	sha32bits_functions.c sha32bits.c sha224.c sha256.c\
-	sha64bits_functions.c sha64bits.c sha512.c sha384.c swap_bytes.c
+	sha64bits_functions.c sha64bits.c sha512.c sha384.c sha512_224.c\
+	sha512_256.c swap_bytes.c hash_functions_utils.c
 DEPS = md5.h libc_utils.h ft_ssl.h sha224.h sha256.h sha32bits_functions.h\
-	sha32bits.h sha64bits.h sha64bits_functions.h sha512.h sha384.h swap_bytes.h
+	sha32bits.h sha64bits.h sha64bits_functions.h sha512.h sha384.h\
+	sha512_224.h sha512_256.h swap_bytes.h hash_functions_utils.h
 OBJECTS = $(SRCS:.c=.o)
 RED = \033[1;31m
 GREEN = \033[1;32m

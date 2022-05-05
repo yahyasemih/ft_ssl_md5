@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 08:46:20 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 16:27:44 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 18:48:11 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "sha256.h"
 # include "sha224.h"
 # include "sha512.h"
+# include "sha512_224.h"
+# include "sha512_256.h"
 # include "sha384.h"
 # include "swap_bytes.h"
 
