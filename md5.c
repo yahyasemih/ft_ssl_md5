@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:21:11 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 19:39:03 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:27:07 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	process_block(uint32_t *bloc, t_md5_context *ctx)
 	ctx->h[3] += ctx->d;
 }
 
-char	*md5(const char *str, uint32_t len)
+char	*md5(const char *str, uint64_t len)
 {
 	t_md5_context	ctx;
 	uint32_t		offset;
@@ -79,7 +79,7 @@ char	*md5(const char *str, uint32_t len)
 }
 
 static char	*last_stream_block(t_md5_context *ctx, char *buff, int r,
-	int total_len)
+	uint64_t total_len)
 {
 	char		*s;
 	uint32_t	new_len;

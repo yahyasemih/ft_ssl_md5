@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha32bits.c                                        :+:      :+:    :+:   */
+/*   sha64bits.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 08:10:50 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 15:38:44 by yez-zain         ###   ########.fr       */
+/*   Created: 2022/05/05 13:44:40 by yez-zain          #+#    #+#             */
+/*   Updated: 2022/05/05 15:39:08 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sha32bits.h"
-#include "sha32bits_functions.h"
+#include "sha64bits.h"
+#include "sha64bits_functions.h"
 
-void	sha32bits_update_ctx(t_sha32bits_context *ctx, int update_hash)
+void	sha64bits_update_ctx(t_sha64bits_context *ctx, int update_hash)
 {
 	if (update_hash == 1)
 	{
@@ -39,17 +39,17 @@ void	sha32bits_update_ctx(t_sha32bits_context *ctx, int update_hash)
 	}
 }
 
-void	sha32bits_block_iteration(t_sha32bits_context *ctx)
+void	sha64bits_block_iteration(t_sha64bits_context *ctx)
 {
-	uint32_t	t;
+	uint64_t	t;
 
-	sha32bits_update_ctx(ctx, 0);
+	sha64bits_update_ctx(ctx, 0);
 	t = 0;
-	while (t < 64)
+	while (t < 80)
 	{
-		ctx->t1 = ctx->h + big_sigma_32(ctx->e, 1)
-			+ ch_32(ctx->e, ctx->f, ctx->g) + g_sha32_k[t] + ctx->w[t];
-		ctx->t2 = big_sigma_32(ctx->a, 0) + maj_32(ctx->a, ctx->b, ctx->c);
+		ctx->t1 = ctx->h + big_sigma_64(ctx->e, 1)
+			+ ch_64(ctx->e, ctx->f, ctx->g) + g_sha64_k[t] + ctx->w[t];
+		ctx->t2 = big_sigma_64(ctx->a, 0) + maj_64(ctx->a, ctx->b, ctx->c);
 		ctx->h = ctx->g;
 		ctx->g = ctx->f;
 		ctx->f = ctx->e;
@@ -60,10 +60,10 @@ void	sha32bits_block_iteration(t_sha32bits_context *ctx)
 		ctx->a = ctx->t1 + ctx->t2;
 		++t;
 	}
-	sha32bits_update_ctx(ctx, 1);
+	sha64bits_update_ctx(ctx, 1);
 }
 
-char	*sha32bits_fill_result(t_sha32bits_context *ctx, char *str,
+char	*sha64bits_fill_result(t_sha64bits_context *ctx, char *str,
 	int hash_nbr)
 {
 	int		i;
@@ -77,20 +77,20 @@ char	*sha32bits_fill_result(t_sha32bits_context *ctx, char *str,
 	{
 		j = 0;
 		s = (char *)(ctx->big_h + i);
-		while (j < 4)
+		while (j < 8)
 		{
-			str[i * 4 + j] = s[3 - j];
+			str[i * 8 + j] = s[7 - j];
 			++j;
 		}
 		++i;
 	}
-	str[hash_nbr * 4] = '\0';
+	str[hash_nbr * 8] = '\0';
 	return (str);
 }
 
-void	sha32bits_process_block(uint32_t *bloc, t_sha32bits_context *ctx)
+void	sha64bits_process_block(uint64_t *bloc, t_sha64bits_context *ctx)
 {
-	uint32_t	t;
+	uint64_t	t;
 
 	t = 0;
 	while (t < 16)
@@ -99,11 +99,11 @@ void	sha32bits_process_block(uint32_t *bloc, t_sha32bits_context *ctx)
 		swap_bytes(&ctx->w[t], sizeof(ctx->w[t]));
 		++t;
 	}
-	while (t < 64)
+	while (t < 80)
 	{
-		ctx->w[t] = small_sigma_32(ctx->w[t - 2], 1) + ctx->w[t - 7]
-			+ small_sigma_32(ctx->w[t - 15], 0) + ctx->w[t - 16];
+		ctx->w[t] = small_sigma_64(ctx->w[t - 2], 1) + ctx->w[t - 7]
+			+ small_sigma_64(ctx->w[t - 15], 0) + ctx->w[t - 16];
 		++t;
 	}
-	sha32bits_block_iteration(ctx);
+	sha64bits_block_iteration(ctx);
 }

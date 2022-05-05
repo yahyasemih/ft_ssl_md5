@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:51:54 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/03 17:23:48 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 14:27:07 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		do_i(t_md5_context *ctx, uint32_t i);
 void		fill_result(t_md5_context *ctx, char *str);
 void		rotate_states(uint32_t *bloc, uint32_t i, t_md5_context *ctx);
 void		process_block(uint32_t *bloc, t_md5_context *ctx);
-char		*md5(const char *str, uint32_t len);
+char		*md5(const char *str, uint64_t len);
 char		*md5_from_stream(int fd);
 
 #endif

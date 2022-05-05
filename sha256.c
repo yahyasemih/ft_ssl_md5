@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 11:49:37 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 11:47:31 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:38:09 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	sha256_init_ctx(t_sha32bits_context *ctx)
 	ctx->big_h[7] = 0x5be0cd19;
 }
 
-char	*sha256(const char *str, uint32_t len)
+char	*sha256(const char *str, uint64_t len)
 {
 	t_sha32bits_context	ctx;
 	uint32_t			i;
@@ -37,13 +37,14 @@ char	*sha256(const char *str, uint32_t len)
 		t = 0;
 		while (t < 16)
 		{
-			ctx.w[t] = swap_bytes(*(uint32_t *)(str + i + t * 4)) >> 32;
+			ctx.w[t] = *(uint32_t *)(str + i + t * 4);
+			swap_bytes(&ctx.w[t], sizeof(ctx.w[t]));
 			++t;
 		}
 		while (t < 64)
 		{
-			ctx.w[t] = small_sigma(ctx.w[t - 2], 1) + ctx.w[t - 7]
-				+ small_sigma(ctx.w[t - 15], 0) + ctx.w[t - 16];
+			ctx.w[t] = small_sigma_32(ctx.w[t - 2], 1) + ctx.w[t - 7]
+				+ small_sigma_32(ctx.w[t - 15], 0) + ctx.w[t - 16];
 			++t;
 		}
 		sha32bits_block_iteration(&ctx);
@@ -52,8 +53,8 @@ char	*sha256(const char *str, uint32_t len)
 	return (sha32bits_fill_result(&ctx, malloc(33 * sizeof(char)), 8));
 }
 
-char	*sha256_last_stream_block(t_sha32bits_context *ctx, char *buff, int r,
-	int total_len)
+static char	*sha256_last_stream_block(t_sha32bits_context *ctx, char *buff,
+	int r, uint64_t total_len)
 {
 	char		*s;
 	uint32_t	new_len;
@@ -61,7 +62,7 @@ char	*sha256_last_stream_block(t_sha32bits_context *ctx, char *buff, int r,
 
 	buff[r] = (char)128;
 	bits_len = 8ULL * total_len;
-	bits_len = swap_bytes(bits_len);
+	swap_bytes(&bits_len, sizeof(bits_len));
 	new_len = ((((r + 8) / 64) + 1) * 64) - 8;
 	ft_memcpy(buff + new_len, &bits_len, sizeof(uint64_t));
 	sha32bits_process_block((uint32_t *)(buff), ctx);

@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha32bits_functions.h                              :+:      :+:    :+:   */
+/*   swap_bytes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 12:26:31 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 14:14:59 by yez-zain         ###   ########.fr       */
+/*   Created: 2022/05/05 15:39:43 by yez-zain          #+#    #+#             */
+/*   Updated: 2022/05/05 15:42:27 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHA32BITS_FUNCTIONS_H
-# define SHA32BITS_FUNCTIONS_H
+#include "swap_bytes.h"
 
-# include <stdlib.h>
+void	swap_bytes(void *x, uint32_t size)
+{
+	char		s[16];
+	char		c;
+	uint32_t	i;
 
-uint32_t	ch_32(uint32_t x, uint32_t y, uint32_t z);
-uint32_t	maj_32(uint32_t x, uint32_t y, uint32_t z);
-uint32_t	rotr_32(uint32_t x, uint32_t n);
-uint32_t	big_sigma_32(uint32_t x, int i);
-uint32_t	small_sigma_32(uint32_t x, int i);
-
-#endif
+	i = 0;
+	ft_memcpy(s, x, size);
+	while (i < size / 2)
+	{
+		c = s[i];
+		s[i] = s[size - 1 - i];
+		s[size - 1 - i] = c;
+		++i;
+	}
+	ft_memcpy(x, s, size);
+}

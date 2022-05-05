@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha32bits_functions.h                              :+:      :+:    :+:   */
+/*   sha512.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 12:26:31 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 14:14:59 by yez-zain         ###   ########.fr       */
+/*   Created: 2022/05/05 13:49:45 by yez-zain          #+#    #+#             */
+/*   Updated: 2022/05/05 13:50:05 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHA32BITS_FUNCTIONS_H
-# define SHA32BITS_FUNCTIONS_H
+#ifndef SHA512_H
+# define SHA512_H
 
 # include <stdlib.h>
+# include "libc_utils.h"
+# include "sha64bits_functions.h"
+# include "ft_ssl.h"
+# include "sha64bits.h"
 
-uint32_t	ch_32(uint32_t x, uint32_t y, uint32_t z);
-uint32_t	maj_32(uint32_t x, uint32_t y, uint32_t z);
-uint32_t	rotr_32(uint32_t x, uint32_t n);
-uint32_t	big_sigma_32(uint32_t x, int i);
-uint32_t	small_sigma_32(uint32_t x, int i);
+char		*sha512(const char *str, uint64_t len);
+char		*sha512_from_stream(int fd);
+void		sha512_init_ctx(t_sha64bits_context *ctx);
 
 #endif

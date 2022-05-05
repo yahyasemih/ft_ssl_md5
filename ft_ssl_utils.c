@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 06:34:17 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 12:10:45 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:39:34 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,7 @@ void	print_result(t_ft_ssl_context *ctx, const char *s, const char *src,
 int	is_valid_command(const char *cmd)
 {
 	return (ft_strcmp(cmd, "md5") == 0 || ft_strcmp(cmd, "sha256") == 0
-		|| ft_strcmp(cmd, "sha224") == 0);
-}
-
-uint64_t	swap_bytes(uint64_t x)
-{
-	x = (x & 0x00000000FFFFFFFF) << 32 | (x & 0xFFFFFFFF00000000) >> 32;
-	x = (x & 0x0000FFFF0000FFFF) << 16 | (x & 0xFFFF0000FFFF0000) >> 16;
-	x = (x & 0x00FF00FF00FF00FF) << 8 | (x & 0xFF00FF00FF00FF00) >> 8;
-	return (x);
+		|| ft_strcmp(cmd, "sha224") == 0 || ft_strcmp(cmd, "sha512") == 0);
 }
 
 char	*process_str_input(const char *str, t_ft_ssl_context *ctx)
@@ -91,9 +83,33 @@ char	*process_str_input(const char *str, t_ft_ssl_context *ctx)
 	buff[r] = (char)128;
 	bits_len = 8ULL * r;
 	if (ctx->hash_function == sha256 || ctx->hash_function == sha224)
-		bits_len = swap_bytes(bits_len);
+		swap_bytes(&bits_len, sizeof(bits_len));
 	ft_memcpy(buff + new_len, &bits_len, sizeof(uint64_t));
 	s = ctx->hash_function(buff, new_len + 8);
+	free(buff);
+	return (s);
+}
+
+char	*process_str_input_64(const char *str, t_ft_ssl_context *ctx)
+{
+	char		*buff;
+	char		*s;
+	uint64_t	r;
+	__uint128_t	bits_len;
+	uint64_t	new_len;
+
+	r = ft_strlen(str);
+	new_len = ((((r + 16) / 128) + 1) * 128) - 16;
+	buff = malloc(new_len + 16);
+	if (buff == NULL)
+		return (NULL);
+	ft_memset(buff, 0, new_len);
+	ft_memcpy(buff, str, r);
+	buff[r] = (char)128;
+	bits_len = 8ULL * (__uint128_t)r;
+	swap_bytes(&bits_len, sizeof(bits_len));
+	ft_memcpy(buff + new_len, &bits_len, sizeof(__uint128_t));
+	s = ctx->hash_function(buff, new_len + 16);
 	free(buff);
 	return (s);
 }

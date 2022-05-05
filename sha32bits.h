@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:06:34 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 12:13:50 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 15:41:41 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define SHA32BITS_H
 
 # include <stdlib.h>
+# include "swap_bytes.h"
 
-const static uint32_t	g_sha_k[64] = {
+const static uint32_t	g_sha32_k[64] = {
 	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
 	0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
 	0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
