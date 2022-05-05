@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 08:46:20 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 15:49:04 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:27:44 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "sha256.h"
 # include "sha224.h"
 # include "sha512.h"
+# include "sha384.h"
 # include "swap_bytes.h"
 
 # define F_QUIET 0x1
