@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha32bits.c                                           :+:      :+:    :+:   */
+/*   sha32bits.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:10:50 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 08:21:41 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:12:28 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	sha32bits_block_iteration(t_sha32bits_context *ctx)
 	sha32bits_update_ctx(ctx, 1);
 }
 
-char	*sha32bits_fill_result(t_sha32bits_context *ctx, char *str, int hash_nbr)
+char	*sha32bits_fill_result(t_sha32bits_context *ctx, char *str,
+	int hash_nbr)
 {
 	int		i;
 	int		j;

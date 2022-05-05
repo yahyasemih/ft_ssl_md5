@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 08:46:20 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 06:59:16 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:09:52 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef char	*(*t_stream_hash_function)(int fd);
 
 typedef struct s_ft_ssl_context {
 	const char				*cmd;
+	const char				*hash_prefix;
 	t_hash_function			hash_function;
 	t_stream_hash_function	stream_hash_function;
 	uint32_t				flags;

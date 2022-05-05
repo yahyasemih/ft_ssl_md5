@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha32bits.h                                           :+:      :+:    :+:   */
+/*   sha32bits.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 08:06:34 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 08:21:50 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:13:50 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHA32bits_H
-# define SHA32bits_H
+#ifndef SHA32BITS_H
+# define SHA32BITS_H
 
 # include <stdlib.h>
 
@@ -52,7 +52,8 @@ typedef struct s_sha32bits_context
 
 void	sha32bits_update_ctx(t_sha32bits_context *ctx, int update_hash);
 void	sha32bits_block_iteration(t_sha32bits_context *ctx);
-char	*sha32bits_fill_result(t_sha32bits_context *ctx, char *str, int hash_nbr);
+char	*sha32bits_fill_result(t_sha32bits_context *ctx, char *str,
+			int hash_nbr);
 void	sha32bits_process_block(uint32_t *bloc, t_sha32bits_context *ctx);
 
 #endif

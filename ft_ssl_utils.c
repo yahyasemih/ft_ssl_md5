@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 06:34:17 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 11:54:03 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:10:45 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	print_result(t_ft_ssl_context *ctx, const char *s, const char *src,
 	}
 	else
 	{
-		write (1, "MD5 (", 5);
+		write (1, ctx->hash_prefix, ft_strlen(ctx->hash_prefix));
 		if (ctx->is_file == 0)
 			write(1, "\"", 1);
 		write(1, src, src_len);

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha32bits_functions.h                                 :+:      :+:    :+:   */
+/*   sha32bits_functions.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 12:26:31 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 08:23:49 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 12:14:14 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHA32bits_FUNCTIONS_H
-# define SHA32bits_FUNCTIONS_H
+#ifndef SHA32BITS_FUNCTIONS_H
+# define SHA32BITS_FUNCTIONS_H
 
 # include "sha256.h"
 
