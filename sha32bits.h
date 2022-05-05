@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha2xx.h                                           :+:      :+:    :+:   */
+/*   sha32bits.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHA2XX_H
-# define SHA2XX_H
+#ifndef SHA32bits_H
+# define SHA32bits_H
 
 # include <stdlib.h>
 
@@ -34,7 +34,7 @@ const static uint32_t	g_sha_k[64] = {
 	0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
 };
 
-typedef struct s_sha2xx_context
+typedef struct s_sha32bits_context
 {
 	uint32_t	big_h[8];
 	uint32_t	a;
@@ -48,11 +48,11 @@ typedef struct s_sha2xx_context
 	uint32_t	w[64];
 	uint32_t	t1;
 	uint32_t	t2;
-}	t_sha2xx_context;
+}	t_sha32bits_context;
 
-void	sha2xx_update_ctx(t_sha2xx_context *ctx, int update_hash);
-void	sha2xx_block_iteration(t_sha2xx_context *ctx);
-char	*sha2xx_fill_result(t_sha2xx_context *ctx, char *str, int hash_nbr);
-void	sha2xx_process_block(uint32_t *bloc, t_sha2xx_context *ctx);
+void	sha32bits_update_ctx(t_sha32bits_context *ctx, int update_hash);
+void	sha32bits_block_iteration(t_sha32bits_context *ctx);
+char	*sha32bits_fill_result(t_sha32bits_context *ctx, char *str, int hash_nbr);
+void	sha32bits_process_block(uint32_t *bloc, t_sha32bits_context *ctx);
 
 #endif

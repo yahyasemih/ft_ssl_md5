@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha2xx_functions.h                                 :+:      :+:    :+:   */
+/*   sha32bits_functions.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHA2XX_FUNCTIONS_H
-# define SHA2XX_FUNCTIONS_H
+#ifndef SHA32bits_FUNCTIONS_H
+# define SHA32bits_FUNCTIONS_H
 
 # include "sha256.h"
 

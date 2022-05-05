@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha2xx.c                                           :+:      :+:    :+:   */
+/*   sha32bits.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sha2xx.h"
-#include "sha2xx_functions.h"
+#include "sha32bits.h"
+#include "sha32bits_functions.h"
 
-void	sha2xx_update_ctx(t_sha2xx_context *ctx, int update_hash)
+void	sha32bits_update_ctx(t_sha32bits_context *ctx, int update_hash)
 {
 	if (update_hash == 1)
 	{
@@ -39,11 +39,11 @@ void	sha2xx_update_ctx(t_sha2xx_context *ctx, int update_hash)
 	}
 }
 
-void	sha2xx_block_iteration(t_sha2xx_context *ctx)
+void	sha32bits_block_iteration(t_sha32bits_context *ctx)
 {
 	uint32_t	t;
 
-	sha2xx_update_ctx(ctx, 0);
+	sha32bits_update_ctx(ctx, 0);
 	t = 0;
 	while (t < 64)
 	{
@@ -60,10 +60,10 @@ void	sha2xx_block_iteration(t_sha2xx_context *ctx)
 		ctx->a = ctx->t1 + ctx->t2;
 		++t;
 	}
-	sha2xx_update_ctx(ctx, 1);
+	sha32bits_update_ctx(ctx, 1);
 }
 
-char	*sha2xx_fill_result(t_sha2xx_context *ctx, char *str, int hash_nbr)
+char	*sha32bits_fill_result(t_sha32bits_context *ctx, char *str, int hash_nbr)
 {
 	int		i;
 	int		j;
@@ -87,7 +87,7 @@ char	*sha2xx_fill_result(t_sha2xx_context *ctx, char *str, int hash_nbr)
 	return (str);
 }
 
-void	sha2xx_process_block(uint32_t *bloc, t_sha2xx_context *ctx)
+void	sha32bits_process_block(uint32_t *bloc, t_sha32bits_context *ctx)
 {
 	uint32_t	t;
 
@@ -103,5 +103,5 @@ void	sha2xx_process_block(uint32_t *bloc, t_sha2xx_context *ctx)
 			+ small_sigma(ctx->w[t - 15], 0) + ctx->w[t - 16];
 		++t;
 	}
-	sha2xx_block_iteration(ctx);
+	sha32bits_block_iteration(ctx);
 }

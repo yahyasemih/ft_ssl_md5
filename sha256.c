@@ -6,13 +6,13 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 11:49:37 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/04 08:22:33 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/05 11:47:31 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sha256.h"
 
-void	sha256_init_ctx(t_sha2xx_context *ctx)
+void	sha256_init_ctx(t_sha32bits_context *ctx)
 {
 	ctx->big_h[0] = 0x6a09e667;
 	ctx->big_h[1] = 0xbb67ae85;
@@ -26,7 +26,7 @@ void	sha256_init_ctx(t_sha2xx_context *ctx)
 
 char	*sha256(const char *str, uint32_t len)
 {
-	t_sha2xx_context	ctx;
+	t_sha32bits_context	ctx;
 	uint32_t			i;
 	uint32_t			t;
 
@@ -46,13 +46,13 @@ char	*sha256(const char *str, uint32_t len)
 				+ small_sigma(ctx.w[t - 15], 0) + ctx.w[t - 16];
 			++t;
 		}
-		sha2xx_block_iteration(&ctx);
+		sha32bits_block_iteration(&ctx);
 		i += 64;
 	}
-	return (sha2xx_fill_result(&ctx, malloc(33 * sizeof(char)), 8));
+	return (sha32bits_fill_result(&ctx, malloc(33 * sizeof(char)), 8));
 }
 
-char	*sha256_last_stream_block(t_sha2xx_context *ctx, char *buff, int r,
+char	*sha256_last_stream_block(t_sha32bits_context *ctx, char *buff, int r,
 	int total_len)
 {
 	char		*s;
@@ -64,13 +64,13 @@ char	*sha256_last_stream_block(t_sha2xx_context *ctx, char *buff, int r,
 	bits_len = swap_bytes(bits_len);
 	new_len = ((((r + 8) / 64) + 1) * 64) - 8;
 	ft_memcpy(buff + new_len, &bits_len, sizeof(uint64_t));
-	sha2xx_process_block((uint32_t *)(buff), ctx);
+	sha32bits_process_block((uint32_t *)(buff), ctx);
 	if (new_len + 8 > 64)
-		sha2xx_process_block((uint32_t *)(buff + 64), ctx);
+		sha32bits_process_block((uint32_t *)(buff + 64), ctx);
 	s = malloc(33 * sizeof(char));
 	if (s == NULL)
 		return (NULL);
-	sha2xx_fill_result(ctx, s, 8);
+	sha32bits_fill_result(ctx, s, 8);
 	return (s);
 }
 
@@ -78,7 +78,7 @@ char	*sha256_from_stream(int fd)
 {
 	char				buff[128];
 	uint32_t			r;
-	t_sha2xx_context	ctx;
+	t_sha32bits_context	ctx;
 	uint64_t			total_len;
 
 	r = 1;
@@ -95,7 +95,7 @@ char	*sha256_from_stream(int fd)
 			write(1, buff, r);
 		if (r < 64)
 			break ;
-		sha2xx_process_block((uint32_t *)(buff), &ctx);
+		sha32bits_process_block((uint32_t *)(buff), &ctx);
 	}
 	return (sha256_last_stream_block(&ctx, buff, r, total_len));
 }
