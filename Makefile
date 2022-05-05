@@ -6,7 +6,7 @@
 #    By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/03 11:23:54 by yez-zain          #+#    #+#              #
-#    Updated: 2022/05/05 15:42:18 by yez-zain         ###   ########.fr        #
+#    Updated: 2022/05/05 15:51:47 by yez-zain         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS = ft_ssl.c ft_ssl_utils.c libc_utils.c main.c md5_utils.c md5.c\
 	sha32bits_functions.c sha32bits.c sha224.c sha256.c\
 	sha64bits_functions.c sha64bits.c sha512.c swap_bytes.c
 DEPS = md5.h libc_utils.h ft_ssl.h sha224.h sha256.h sha32bits_functions.h\
-	sha32bits.h sha64bits.h sha64bits_functions.h sha512.h
+	sha32bits.h sha64bits.h sha64bits_functions.h sha512.h swap_bytes.h
 OBJECTS = $(SRCS:.c=.o)
 RED = \033[1;31m
 GREEN = \033[1;32m
