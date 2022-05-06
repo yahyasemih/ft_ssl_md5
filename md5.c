@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:21:11 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 14:27:07 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:49:55 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ char	*md5_from_stream(int fd)
 	ctx.h[3] = 0x10325476;
 	while (r > 0)
 	{
-		r = read(fd, buff, 64);
+		r = ft_read_block(fd, buff, 64);
 		if (r < 0)
 			return (NULL);
 		ft_memset(buff + r, 0, 128 - r);

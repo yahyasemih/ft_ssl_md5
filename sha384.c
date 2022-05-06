@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:50:37 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 16:34:09 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:49:12 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*sha384_from_stream(int fd)
 	sha384_init_ctx(&ctx);
 	while (r > 0)
 	{
-		r = read(fd, buff, 128);
+		r = ft_read_block(fd, buff, 128);
 		if (r < 0)
 			return (NULL);
 		ft_memset(buff + r, 0, 256 - r);

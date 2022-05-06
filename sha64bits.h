@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:43:56 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 15:41:23 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:50:05 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include "swap_bytes.h"
+# include "ft_read_block.h"
 
 const static uint64_t	g_sha64_k[80] = {
 	0x428a2f98d728ae22, 0x7137449123ef65cd,

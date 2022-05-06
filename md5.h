@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:51:54 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 14:27:07 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:47:29 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "libc_utils.h"
+# include "ft_read_block.h"
 
 const static uint32_t	g_k[64] = {
 	0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
