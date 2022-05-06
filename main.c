@@ -6,12 +6,18 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:15:29 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/06 14:50:17 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:32:27 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 #include "hash_functions_utils.h"
+
+static int	print_usage(void)
+{
+	write(1, "usage: ft_ssl command [flags] [file/string]\n", 44);
+	return (0);
+}
 
 static int	handle_invalid_command(const char *cmd)
 {
@@ -31,15 +37,28 @@ static int	handle_invalid_command(const char *cmd)
 	return (1);
 }
 
+int	process_stdin(t_ft_ssl_context *ctx)
+{
+	char	*s;
+	int		fd;
+
+	fd = open("/dev/stdin", O_RDONLY);
+	if (fd >= 0)
+	{
+		s = ctx->stream_hash_function(fd, (ctx->flags & F_QUIET) != 0);
+		ctx->is_file = 1;
+		print_result(ctx, s, "stdin", 5);
+		free(s);
+	}
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_ft_ssl_context	ctx;
 
 	if (argc < 2)
-	{
-		write(1, "usage: ft_ssl command [flags] [file/string]\n", 44);
-		return (0);
-	}
+		return (print_usage());
 	else if (is_valid_command(argv[1]) == 0)
 		return (handle_invalid_command(argv[1]));
 	ft_memset(&ctx, 0, sizeof(ctx));
@@ -56,5 +75,9 @@ int	main(int argc, char *argv[])
 		ctx.process_function = process_str_input_64;
 	else
 		ctx.process_function = process_str_input;
-	return (process_arguments(&ctx));
+	ctx.use_stdin = 1;
+	if (argc == 2)
+		return (process_stdin(&ctx));
+	else
+		return (process_arguments(&ctx));
 }

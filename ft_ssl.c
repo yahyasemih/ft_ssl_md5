@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 08:46:59 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/06 13:46:57 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:32:14 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	process_files(t_ft_ssl_context *ctx, int i)
 		}
 		else
 		{
-			s = ctx->stream_hash_function(fd);
+			s = ctx->stream_hash_function(fd, (ctx->flags & F_QUIET) != 0);
 			print_result(ctx, s, ctx->argv[i], ft_strlen(ctx->argv[i]));
 			free(s);
 			close(fd);
@@ -53,7 +53,11 @@ static void	handle_prepand_option(t_ft_ssl_context *ctx)
 {
 	char	*s;
 
-	s = ctx->stream_hash_function(0);
+	if (!(ctx->flags & F_QUIET))
+		write(1, "(\"", 2);
+	s = ctx->stream_hash_function(0, (ctx->flags & F_QUIET) != 0);
+	if (!(ctx->flags & F_QUIET))
+		write(1, "\")= ", 4);
 	if (s == NULL)
 		return ;
 	write_in_hex(s, ctx->len);
@@ -66,6 +70,8 @@ static int	process_option(t_ft_ssl_context *ctx, int j)
 	char	*input;
 	char	*s;
 
+	if (ft_strchr("ps", ctx->argv[ctx->curr_arg][j]) != NULL)
+		ctx->use_stdin = 0;
 	if (ctx->argv[ctx->curr_arg][j] == 'q')
 		ctx->flags |= F_QUIET;
 	else if (ctx->argv[ctx->curr_arg][j] == 'r')
@@ -97,22 +103,22 @@ int	process_arguments(t_ft_ssl_context *ctx)
 	{
 		if (ctx->argv[ctx->curr_arg][0] == '-')
 		{
-			j = 1;
+			j = 0;
 			must_continue = 1;
-			while (must_continue == 1 && ctx->argv[ctx->curr_arg][j] != '\0')
-			{
+			while (must_continue == 1 && ctx->argv[ctx->curr_arg][++j] != '\0')
 				if (ft_strchr("pqrs", ctx->argv[ctx->curr_arg][j]) != NULL)
 					must_continue = process_option(ctx, j);
-				else
-					return (unknown_option_error(ctx->argv[ctx->curr_arg][j]));
-				++j;
-			}
+			else
+				return (unknown_option_error(ctx->argv[ctx->curr_arg][j]));
 			++ctx->curr_arg;
 		}
 		else
 			break ;
 	}
 	ctx->is_file = 1;
-	process_files(ctx, ctx->curr_arg);
+	if (ctx->use_stdin == 0 || ctx->curr_arg < ctx->argc)
+		process_files(ctx, ctx->curr_arg);
+	else
+		process_stdin(ctx);
 	return (0);
 }

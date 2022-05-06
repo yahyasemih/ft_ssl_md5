@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 08:46:20 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 18:48:11 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:30:01 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define F_REVERSE 0x2
 
 typedef char	*(*t_hash_function)(const char *str, uint64_t len);
-typedef char	*(*t_stream_hash_function)(int fd);
+typedef char	*(*t_stream_hash_function)(int fd, int is_quite);
 
 typedef struct s_ft_ssl_context {
 	const char				*cmd;
@@ -46,6 +46,7 @@ typedef struct s_ft_ssl_context {
 	int						curr_arg;
 	int						len;
 	int						is_big_endian;
+	int						use_stdin;
 }	t_ft_ssl_context;
 
 void	write_in_hex(const char *str, int len);
@@ -55,5 +56,5 @@ int		is_valid_command(const char *cmd);
 char	*process_str_input(const char *str, t_ft_ssl_context *ctx);
 char	*process_str_input_64(const char *str, t_ft_ssl_context *ctx);
 int		process_arguments(t_ft_ssl_context *ctx);
-
+int		process_stdin(t_ft_ssl_context *ctx);
 #endif

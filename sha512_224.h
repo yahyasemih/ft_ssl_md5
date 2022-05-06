@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sha512-224.h                                       :+:      :+:    :+:   */
+/*   sha512_224.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:49:45 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 18:47:02 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:30:00 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "sha64bits.h"
 
 char		*sha512_224(const char *str, uint64_t len);
-char		*sha512_224_from_stream(int fd);
+char		*sha512_224_from_stream(int fd, int is_quite);
 void		sha512_224_init_ctx(t_sha64bits_context *ctx);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 13:50:37 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/06 20:49:30 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:30:40 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static char	*sha512_256_last_stream_block(t_sha64bits_context *ctx, char *buff,
 	return (s);
 }
 
-char	*sha512_256_from_stream(int fd)
+char	*sha512_256_from_stream(int fd, int is_quite)
 {
 	char				buff[256];
 	uint64_t			r;
@@ -93,7 +93,7 @@ char	*sha512_256_from_stream(int fd)
 		ft_memset(buff + r, 0, 256 - r);
 		total_len += r;
 		if (fd == 0)
-			write(1, buff, r);
+			write(1, buff, r - (r > 0 && !is_quite && buff[r - 1] == '\n'));
 		if (r < 128)
 			break ;
 		sha64bits_process_block((uint64_t *)(buff), &ctx);

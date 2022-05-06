@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 09:21:11 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/06 20:49:55 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:30:40 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static char	*last_stream_block(t_md5_context *ctx, char *buff, int r,
 	return (s);
 }
 
-char	*md5_from_stream(int fd)
+char	*md5_from_stream(int fd, int is_quite)
 {
 	char			buff[128];
 	uint32_t		r;
@@ -120,7 +120,7 @@ char	*md5_from_stream(int fd)
 		ft_memset(buff + r, 0, 128 - r);
 		total_len += r;
 		if (fd == 0)
-			write(1, buff, r);
+			write(1, buff, r - (r > 0 && !is_quite && buff[r - 1] == '\n'));
 		if (r < 64)
 			break ;
 		process_block((uint32_t *)(buff), &ctx);
