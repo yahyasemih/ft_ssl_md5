@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 08:46:59 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 15:28:50 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:46:57 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ static int	process_option(t_ft_ssl_context *ctx, int j)
 		else
 			return (write(2, "ft_ssl: Error: '-s' requires argument\n", 45), 0);
 		s = ctx->process_function(input, ctx);
-		if (s == NULL)
-			return (0);
 		print_result(ctx, s, input, ft_strlen(input));
 		free(s);
 		return (0);

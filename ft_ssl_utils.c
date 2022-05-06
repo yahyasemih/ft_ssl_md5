@@ -6,7 +6,7 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 06:34:17 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 18:35:22 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 13:46:03 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,27 @@ void	write_in_hex(const char *str, int len)
 void	print_result(t_ft_ssl_context *ctx, const char *s, const char *src,
 	int src_len)
 {
-	if ((ctx->flags & F_QUIET) != 0)
+	if (s == NULL)
+	{
+		write(1, "\n", 1);
+		return ;
+	}
+	else if ((ctx->flags & F_QUIET) != 0)
 		write_in_hex(s, ctx->len);
 	else if ((ctx->flags & F_REVERSE) != 0)
 	{
 		write_in_hex(s, ctx->len);
 		write(1, " ", 1);
-		if (ctx->is_file == 0)
-			write(1, "\"", 1);
+		write(1, "\"", (ctx->is_file + 1) % 2);
 		write(1, src, src_len);
-		if (ctx->is_file == 0)
-			write(1, "\"", 1);
+		write(1, "\"", (ctx->is_file + 1) % 2);
 	}
 	else
 	{
-		write (1, ctx->hash_prefix, ft_strlen(ctx->hash_prefix));
-		if (ctx->is_file == 0)
-			write(1, "\"", 1);
+		write(1, ctx->hash_prefix, ft_strlen(ctx->hash_prefix));
+		write(1, "\"", (ctx->is_file + 1) % 2);
 		write(1, src, src_len);
-		if (ctx->is_file == 0)
-			write(1, "\"", 1);
+		write(1, "\"", (ctx->is_file + 1) % 2);
 		write (1, ") = ", 4);
 		write_in_hex(s, ctx->len);
 	}
