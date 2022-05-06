@@ -6,25 +6,42 @@
 /*   By: yez-zain <yez-zain@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 10:15:29 by yez-zain          #+#    #+#             */
-/*   Updated: 2022/05/05 18:43:24 by yez-zain         ###   ########.fr       */
+/*   Updated: 2022/05/06 14:50:17 by yez-zain         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 #include "hash_functions_utils.h"
 
+static int	handle_invalid_command(const char *cmd)
+{
+	write(2, "ft_ssl: Error: '", 16);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, "' is an invalid command.\n", 25);
+	write(2, "\nCommands:\n", 11);
+	write(2, "md5\n", 4);
+	write(2, "sha224\n", 7);
+	write(2, "sha384\n", 7);
+	write(2, "sha256\n", 7);
+	write(2, "sha512\n", 7);
+	write(2, "sha512/224\n", 11);
+	write(2, "sha512/256\n", 11);
+	write(2, "\nFlags:\n", 8);
+	write(2, "-p -q -r -s\n", 12);
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_ft_ssl_context	ctx;
 
-	if (argc <= 2)
-		return (write(1, "usage: ft_ssl command [flags] [file/string]\n", 44));
-	else if (is_valid_command(argv[1]) == 0)
+	if (argc < 2)
 	{
-		write(2, "ft_ssl: Error: '", 16);
-		write(2, argv[1], ft_strlen(argv[1]));
-		return (write(2, "' is an invalid command.\n", 25));
+		write(1, "usage: ft_ssl command [flags] [file/string]\n", 44);
+		return (0);
 	}
+	else if (is_valid_command(argv[1]) == 0)
+		return (handle_invalid_command(argv[1]));
 	ft_memset(&ctx, 0, sizeof(ctx));
 	ctx.cmd = argv[1];
 	ctx.argc = argc;
